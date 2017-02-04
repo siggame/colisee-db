@@ -2,18 +2,12 @@ CREATE TYPE shirt_size_enum AS ENUM ('s', 'm', 'l', 'xl', 'xxl');
 CREATE TYPE pizza_choice_enum AS ENUM ('cheese', 'pepperoni', 'bacon', 'chicken');
 CREATE TYPE prog_lang_enum AS ENUM ('cpp', 'python', 'csharp', 'javascript', 'java', 'lua');
 CREATE TYPE game_status_enum as ENUM ('scheduled', 'playing', 'finished');
-CREATE TYPE schedule_type_enum as ENUM ('random', 'single-elim', 'triple-elim', 'swiss');
 
 CREATE TABLE "user" (
     id serial NOT NULL PRIMARY KEY,
-    name varchar(64) NOT NULL UNIQUE,
-    full_name varchar(64),
-    email varchar(64) NOT NULL UNIQUE,
+    gitlab_id integer NOT NULL, 
 
-    is_dev boolean NOT NULL DEFAULT false,
-    is_student boolean NOT NULL DEFAULT true,
-    is_sponsor boolean NOT NULL DEFAULT false,
-    is_prev_competitor boolean NOT NULL DEFAULT false,
+    is_eligible boolean NOT NULL DEFAULT true,
 
     shirt_size shirt_size_enum,
     pizza_choice pizza_choice_enum,
@@ -45,25 +39,16 @@ CREATE TABLE "competition" (
 
 CREATE TABLE "team" (
     id serial NOT NULL PRIMARY KEY,
-    name varchar(64) NOT NULL UNIQUE,
-
-    gitlab_id integer,
-
-    members integer[],
-    prog_lang prog_lang_enum,
-
-    competition integer REFERENCES "competition",
-
-    is_paid boolean NOT NULL DEFAULT false,
-    paid_time timestamp,
-    is_eligible boolean NOT NULL DEFAULT true,
-
-    is_embargoed boolean NOT NULL DEFAULT true,
-    embargo_reason varchar(128) DEFAULT 'Initial build not performed.',
-    last_embargoed_time timestamp NOT NULL DEFAULT now(),
+    gitlab_id integer NOT NULL,
 
     created_time timestamp NOT NULL DEFAULT now(),
     modified_time timestamp NOT NULL DEFAULT now()
+);
+
+CREATE TABLE "user_team" (
+    user_id integer NOT NULL REFERENCES "user",
+    team_id integer NOT NULL REFERENCES "team",
+    PRIMARY KEY(user_id, team_id)
 );
 
 CREATE TABLE "team_invitation" (
@@ -76,17 +61,13 @@ CREATE TABLE "team_invitation" (
     modified_time timestamp NOT NULL DEFAULT now()
 );
 
+-- An individual game between teams
 CREATE TABLE "game" (
     id serial NOT NULL PRIMARY KEY,
-    teams integer[] NOT NULL,
-    competition integer NOT NULL REFERENCES "competition",
-
     status game_status_enum NOT NULL DEFAULT 'scheduled',
 
-    winners integer[],
-    win_reasons varchar(64)[],
-    losers integer[],
-    lose_reasons varchar(64)[],
+    win_reason varchar(64),
+    lose_reason varchar(64),
 
     gamelog bytea,
 
@@ -94,20 +75,10 @@ CREATE TABLE "game" (
     modified_time timestamp NOT NULL DEFAULT now()
 );
 
-CREATE TABLE "schedule" (
-    id serial NOT NULL PRIMARY KEY,
-    
-    type schedule_type_enum NOT NULL,
-    
-    include_all boolean NOT NULL DEFAULT false,
-    include_alum boolean NOT NULL DEFAULT false,
-    include_dev boolean NOT NULL DEFAULT false,
-    include_eligible boolean NOT NULL DEFAULT true,
-    include_sponsor boolean NOT NULL DEFAULT false,
-    
-    data json,
-    result json,
-    
-    created_time timestamp NOT NULL DEFAULT now(),
-    modified_time timestamp NOT NULL DEFAULT now()
+-- Teams participating in a game
+CREATE TABLE "team_game" (
+    boolean winner;
+    team_id integer NOT NULL REFERENCES "team",
+    game_id integer NOT NULL REFERENCES "game",
+    PRIMARY KEY(team_id, game_id)
 );
