@@ -71,6 +71,9 @@ CREATE TABLE "game" (
 
     gamelog bytea,
 
+    -- if this game has been visualized before
+    visualized boolean NOT NULL DEFAULT false,
+
     created_time timestamp NOT NULL DEFAULT now(),
     modified_time timestamp NOT NULL DEFAULT now()
 );
