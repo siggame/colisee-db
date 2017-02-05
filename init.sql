@@ -77,7 +77,7 @@ CREATE TABLE "game" (
 
 -- Teams participating in a game
 CREATE TABLE "team_game" (
-    boolean winner,
+    winner boolean,
     team_id integer NOT NULL REFERENCES "team",
     game_id integer NOT NULL REFERENCES "game",
     PRIMARY KEY(team_id, game_id)
