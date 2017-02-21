@@ -51,11 +51,11 @@ CREATE TABLE "user_team" (
     PRIMARY KEY(user_id, team_id)
 );
 
-CREATE TABLE "team_invitation" (
+CREATE TABLE "invite" (
     id serial NOT NULL PRIMARY KEY,
     team integer NOT NULL REFERENCES "team",
-    sender integer NOT NULL REFERENCES "user",
-    receiver integer NOT NULL REFERENCES "user",
+    member integer NOT NULL REFERENCES "user",
+    message varchar(140) NOT NULL DEFAULT "",
 
     created_time timestamp NOT NULL DEFAULT now(),
     modified_time timestamp NOT NULL DEFAULT now()
