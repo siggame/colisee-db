@@ -55,7 +55,7 @@ CREATE TABLE "invite" (
     id serial NOT NULL PRIMARY KEY,
     team integer NOT NULL REFERENCES "team",
     member integer NOT NULL REFERENCES "user",
-    message varchar(140) NOT NULL DEFAULT "",
+    message varchar(140) NOT NULL DEFAULT " ",
 
     created_time timestamp NOT NULL DEFAULT now(),
     modified_time timestamp NOT NULL DEFAULT now()
