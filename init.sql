@@ -15,7 +15,7 @@ CREATE TABLE "user" (
 
 -- extra data for GitLab Group representing a competition
 CREATE TABLE "competition" (
-    id number NOT NULL PRIMARY KEY,
+    id integer NOT NULL PRIMARY KEY,
 
     start_time timestamp,
     end_time timestamp,
@@ -24,7 +24,7 @@ CREATE TABLE "competition" (
     is_running boolean NOT NULL DEFAULT false,
 
     min_team_size integer NOT NULL DEFAULT 2,
-    max_team_size integer NOT NULL DEFAULT 2,
+    max_team_size integer NOT NULL DEFAULT 2
 );
 
 -- extra data for GitLab Project representing a team
