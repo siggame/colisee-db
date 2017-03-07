@@ -1,0 +1,14 @@
+sudo: required
+
+services:
+  - docker
+
+before_script:
+  - docker build -t db:latest .
+  - docker run --name test-db --detach db:latest
+
+script:
+  - ./test.sh test-db
+
+after_script:
+  - docker stop test-db && docker rm test-db
