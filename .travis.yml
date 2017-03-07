@@ -4,7 +4,7 @@ services:
   - docker
 
 before_script:
-  - docker run --name test-db --expose 5432:5432 --detach postgres:latest
+  - docker run --name test-db --publish 5432:5432 --detach postgres:latest
   - docker cp init.sql test-db:/tmp
 
 script:
