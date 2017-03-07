@@ -14,7 +14,6 @@ while ! docker exec "$1" psql -U postgres -h localhost \
   if ((timeout==10)); then
     printf "\r\e[KWaiting for postgres ${dots:0:(($timeout * 2))} \xe2\x9c\x92";
     echo -e "\nDatabase failed to start!";
-    tput cnorm;
     exit 1;
   fi;
 done;
@@ -22,4 +21,4 @@ done;
 printf "\r\e[KWaiting for postgres ${dots:0:(($timeout * 2))} \xe2\x9c\x94";
 echo -e "\nDatabase successfully started!";
 
-docker exec "$1" psql docker -v ON_ERROR_STOP="$2" -U postgres -h localhost -f /tmp/init.sql;
+docker exec "$1" psql -v ON_ERROR_STOP="$2" -f /tmp/init.sql docker postgres;
