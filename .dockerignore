@@ -1,0 +1,7 @@
+.git/
+.gitignore
+.gitattributes
+Dockerfile
+.dockerignore
+test.sh
+test.local.sh

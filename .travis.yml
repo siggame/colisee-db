@@ -7,7 +7,7 @@ before_script:
   - docker run --name test-db --detach postgres:latest
 
 script:
-  - docker cp init.sql test-db:/tmp && ./test.sh test-db
+  - docker cp init.sql test-db:/tmp && ./test.sh test-db 1
 
 after_script:
   - docker stop test-db && docker rm test-db
