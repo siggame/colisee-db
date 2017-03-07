@@ -4,11 +4,10 @@ services:
   - docker
 
 before_script:
-  - docker build -t db:latest .
-  - docker run --name test-db --detach db:latest
+  - docker run --name test-db --detach postgres:latest
 
 script:
-  - ./test.sh test-db
+  - docker cp init.sql test-db:/tmp && ./test.sh test-db
 
 after_script:
   - docker stop test-db && docker rm test-db
