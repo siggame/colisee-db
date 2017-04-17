@@ -28,7 +28,7 @@ CREATE TABLE "team" (
     
     valid_submission_tar_url varchar(64),
     valid_submission_build_output_url varchar(64),
-    valid_submission_time timestamp,
+    valid_submission_time timestamp
 );
 
 -- An individual game between teams
