@@ -12,7 +12,7 @@ CREATE TABLE "team" (
 
     -- TODO: Add additional contact info
 
-    is eligible boolean NOT NULL DEFAULT true,
+    is_eligible boolean NOT NULL DEFAULT true,
 
     -- info used to store team builds
     latest_submission_tar_url varchar(64),
