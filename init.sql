@@ -40,3 +40,11 @@ CREATE TABLE "game" (
     created_time timestamp NOT NULL DEFAULT now(),
     modified_time timestamp NOT NULL DEFAULT now()
 );
+
+-- Links the Team and Game tables
+CREATE TABLE "team_games" (
+    game_id integer NOT NULL PRIMARY KEY REFERENCES game(id),
+    team1 varchar(64) NOT NULL REFERENCES team(name),
+    team2 varchar(64) NOT NULL REFERENCES team(name),
+    winner varchar(64) CHECK ( winner = team1 OR winner = team2 ) REFERENCES team(name)
+);
