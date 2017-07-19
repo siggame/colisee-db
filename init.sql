@@ -1,27 +1,20 @@
-CREATE TYPE shirt_size_enum AS ENUM ('s', 'm', 'l', 'xl', 'xxl');
-CREATE TYPE pizza_choice_enum AS ENUM ('cheese', 'pepperoni', 'bacon', 'chicken');
 CREATE TYPE game_status_enum as ENUM ('scheduled', 'playing', 'finished');
 
--- extra data for GitLab User representing an individual competitor
-CREATE TABLE "user" (
+-- info for our teams
+CREATE TABLE "team" (
+    -- basic team info
     id serial NOT NULL PRIMARY KEY,
-    name varchar(32) NOT NULL UNIQUE,
-    full_name varchar(128),
+    name varchar(64) NOT NULL UNIQUE,
+    contact_name varchar(128) NOT NULL,
+    contact_email varchar(128) NOT NULL,
+    -- can be changed to match whatever encryption we want
+    password varchar(256) NOT NULL,
+
+    -- TODO: Add additional contact info
 
     is_eligible boolean NOT NULL DEFAULT true,
 
-    shirt_size shirt_size_enum,
-    pizza_choice pizza_choice_enum
-);
-
-CREATE TABLE "team_member" (
-       
-);
-
--- extra data for GitLab Project representing a team
-CREATE TABLE "team" (
-    id serial NOT NULL PRIMARY KEY,
-    
+    -- info used to store team builds
     latest_submission_tar_url varchar(64),
     latest_submission_build_output_url varchar(64),
     latest_submission_time timestamp,
@@ -46,4 +39,12 @@ CREATE TABLE "game" (
 
     created_time timestamp NOT NULL DEFAULT now(),
     modified_time timestamp NOT NULL DEFAULT now()
+);
+
+-- Links the Team and Game tables
+CREATE TABLE "team_games" (
+    game_id integer NOT NULL PRIMARY KEY REFERENCES game(id),
+    team1 varchar(64) NOT NULL REFERENCES team(name),
+    team2 varchar(64) NOT NULL REFERENCES team(name),
+    winner varchar(64) CHECK ( winner = team1 OR winner = team2 ) REFERENCES team(name)
 );
