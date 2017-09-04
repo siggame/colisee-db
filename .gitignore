@@ -1,0 +1,10 @@
+.vscode/
+.idea/
+.vagrant/
+
+node_modules/
+
+src/**/*.js
+src/*.js
+
+app.log

@@ -1,4 +1,4 @@
 FROM postgres:latest
-MAINTAINER siggame
+LABEL maintainer="siggame@mst.edu"
 
 ADD init.sql /docker-entrypoint-initdb.d/
