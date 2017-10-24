@@ -1,11 +1,11 @@
-create table "teams" ("id" serial primary key, "name" varchar(64) not null, "contact_email" varchar(64) not null, "password" varchar(256) not null, "is_eligible" boolean not null, "created_at" timestamptz not null default CURRENT_TIMESTAMP, "updated_at" timestamptz not null default CURRENT_TIMESTAMP);
+create table "teams" ("id" serial primary key, "name" varchar(64) not null, "contact_email" varchar(64) not null, "contact_name" varchar(64) not null, "hash_iterations" integer not null default '0', "is_eligible" boolean not null, "password" varchar(256) not null, "role" text check ("role" in ('user', 'admin')) not null, "salt" varchar(256) not null, "created_at" timestamptz not null default CURRENT_TIMESTAMP, "updated_at" timestamptz not null default CURRENT_TIMESTAMP);
 alter table "teams" add constraint "teams_name_unique" unique ("name");
 alter table "teams" add constraint "teams_contact_email_unique" unique ("contact_email");
 create table "submissions" ("id" serial primary key, "team_id" integer, "version" integer not null, "status" text check ("status" in ('queued', 'building', 'finished', 'failed')) not null, "submission_url" varchar(255), "log_url" varchar(255), "image_name" varchar(255), "created_at" timestamptz not null default CURRENT_TIMESTAMP, "updated_at" timestamptz not null default CURRENT_TIMESTAMP);
 comment on column "submissions"."image_name" is 'The docker image of the submission contained on the Arena Docker Registry';
 alter table "submissions" add constraint "submissions_team_id_foreign" foreign key ("team_id") references "teams" ("id");
 alter table "submissions" add constraint "submissions_team_id_version_unique" unique ("team_id", "version");
-create table "games" ("id" serial primary key, "status" text check ("status" in ('queued', 'playing', 'finished', 'failed')), "win_reason" varchar(255), "lose_reason" varchar(255), "winner_id" integer, "log_url" varchar(255), "created_at" timestamptz not null default CURRENT_TIMESTAMP, "updated_at" timestamptz not null default CURRENT_TIMESTAMP);
+create table "games" ("id" serial primary key, "status" text check ("status" in ('queued', 'playing', 'finished', 'failed')) not null, "win_reason" varchar(255), "lose_reason" varchar(255), "winner_id" integer, "log_url" varchar(255), "created_at" timestamptz not null default CURRENT_TIMESTAMP, "updated_at" timestamptz not null default CURRENT_TIMESTAMP);
 comment on column "games"."winner_id" is 'The id of the winning submission';
 comment on column "games"."log_url" is 'Link to the game log.';
 alter table "games" add constraint "games_winner_id_foreign" foreign key ("winner_id") references "submissions" ("id");
