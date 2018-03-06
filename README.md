@@ -3,9 +3,10 @@
 A brief description of the project.
 
 [![Travis](https://img.shields.io/travis/siggame/colisee-db.svg?style=flat-square)](https://travis-ci.org/siggame/colisee-db)
-[![Docker Pulls](https://img.shields.io/docker/pulls/colisee-db/registre.svg?style=flat-square)](https://hub.docker.com/r/siggame/colisee-db/)
-[![GitHub release](https://img.shields.io/github/release/siggame/colisee-db.svg?style=flat-square)](https://github.com/siggame/colisee-db/releases)
-[![Dependencies](https://img.shields.io/david/siggame/colisee-db.svg)](https://github.com/siggame/colisee-db)
+[![Docker Pulls](https://img.shields.io/docker/pulls/siggame/colisee-db.svg?style=flat-square)](https://hub.docker.com/r/siggame/colisee-db)
+[![GitHub tag](https://img.shields.io/github/tag/siggame/colisee-db.svg?style=flat-square)](https://github.com/siggame/colisee-db/tags)
+[![dependencies Status](https://david-dm.org/siggame/colisee-db/status.svg)](https://david-dm.org/siggame/colisee-db)
+[![devDependencies Status](https://david-dm.org/siggame/colisee-db/dev-status.svg)](https://david-dm.org/siggame/colisee-db?type=dev)
 
 ## Table Of Contents
 - [Description](#description)
@@ -37,16 +38,16 @@ Information about how to use the service or library.
 ## Contributors
 - [Russley Shaw](https://github.com/russleyshaw)
 - [user404d](https://github.com/user404d)
-- [Hannah Reinbolt](https://github.com/LoneGalaxy)
-- [Matthew Qualls](https://github.com/MatthewQualls)
+- [Reno DuBois](https://github.com/renodubois)
+- [Michael Beaver](https://github.com/michael-beaver)
 
 ## Change Log
 
-View our [CHANGELOG.md](https://github.com/siggame/colisee-db/blob/master/CHANGELOG.md)
+View our [CHANGELOG.md](CHANGELOG.md)
 
 ## License
 
-View our [LICENSE.md](https://github.com/siggame/colisee/blob/master/LICENSE.md)
+View our [LICENSE](https://github.com/siggame/colisee/blob/master/LICENSE)
 
 ## Contributing
 
