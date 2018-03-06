@@ -9,6 +9,7 @@ A brief description of the project.
 [![devDependencies Status](https://david-dm.org/siggame/colisee-db/dev-status.svg)](https://david-dm.org/siggame/colisee-db?type=dev)
 
 ## Table Of Contents
+
 - [Description](#description)
 - [Getting Started](#getting-started)
 - [Usage](#usage)
@@ -36,6 +37,7 @@ We currently have a `stable` and `latest` release for this service. Replace `<TA
 Information about how to use the service or library.
 
 ## Contributors
+
 - [Russley Shaw](https://github.com/russleyshaw)
 - [user404d](https://github.com/user404d)
 - [Reno DuBois](https://github.com/renodubois)
